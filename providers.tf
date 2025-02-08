@@ -12,7 +12,7 @@ provider "yandex" {
   cloud_id  = var.cloud_id
   folder_id = var.folder_id
   zone      = var.default_zone
-  service_account_key_file = file("/media/storage/05_Project/Terraform/authorized_key.json")
+  service_account_key_file = file("тут могла быть ваша реклама")
 }
 
 # отправка state
