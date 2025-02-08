@@ -5,16 +5,23 @@ module "vpc_dev" {
   default_cidr = var.default_cidr
 }
 
+<<<<<<< HEAD
 data "template_file" "cloudinit" {
   template = file("./cloud-init.yml")
 
   vars = {
     ssh_public_key = file("тут могла быть ваша реклама")
   }
+=======
+locals {
+  cloudinit = templatefile("./cloud-init.yml", {
+    ssh_public_key = file("тут могла быть ваша реклама")
+  })
+>>>>>>> 90a12e5 (Исправлены ошибки TFLint и Checkov)
 }
 
 module "test-vm" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=f96532a351d512ef1888e6c12a3d47c65fa10479" # Правка 
   env_name       = var.vm_name
   network_id     = module.vpc_dev.vpc_id
   subnet_zones   = [module.vpc_dev.subnet_zone]
@@ -29,13 +36,13 @@ module "test-vm" {
   }
 
   metadata = {
-    user-data          = data.template_file.cloudinit.rendered 
+    user-data          = local.cloudinit
     serial-port-enable = 1
   }
 }
 
 module "test-vm2" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=f96532a351d512ef1888e6c12a3d47c65fa10479" # Правка 
   env_name       = var.vm_name
   network_id     = module.vpc_dev.vpc_id
   subnet_zones   = [module.vpc_dev.subnet_zone]
@@ -50,7 +57,7 @@ module "test-vm2" {
   }
 
   metadata = {
-    user-data          = data.template_file.cloudinit.rendered 
+    user-data          = local.cloudinit
     serial-port-enable = 1
   }
 }

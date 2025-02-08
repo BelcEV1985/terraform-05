@@ -2,6 +2,7 @@ terraform {
   required_providers {
     yandex = {
       source = "yandex-cloud/yandex"
+      version = "~> 0.136" # Правка - указал актуальную версию
     }
   }
   required_version = ">=1.8.4"
@@ -15,7 +16,8 @@ provider "yandex" {
   service_account_key_file = file("тут могла быть ваша реклама")
 }
 
-# отправка state
+# s3 bucket
+
     backend "s3" {
     endpoints = { s3 = "https://storage.yandexcloud.net"    }
     bucket = "terra-bro"
