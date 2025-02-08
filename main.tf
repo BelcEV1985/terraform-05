@@ -14,7 +14,7 @@ data "template_file" "cloudinit" {
 }
 
 module "test-vm" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=f96532a351d512ef1888e6c12a3d47c65fa10479" # Правка 
   env_name       = var.vm_name
   network_id     = module.vpc_dev.vpc_id
   subnet_zones   = [module.vpc_dev.subnet_zone]
@@ -35,7 +35,7 @@ module "test-vm" {
 }
 
 module "test-vm2" {
-  source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
+  source = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=f96532a351d512ef1888e6c12a3d47c65fa10479" # Правка 
   env_name       = var.vm_name
   network_id     = module.vpc_dev.vpc_id
   subnet_zones   = [module.vpc_dev.subnet_zone]
