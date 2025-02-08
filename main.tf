@@ -5,12 +5,19 @@ module "vpc_dev" {
   default_cidr = var.default_cidr
 }
 
+<<<<<<< HEAD
 data "template_file" "cloudinit" {
   template = file("./cloud-init.yml")
 
   vars = {
     ssh_public_key = file("тут могла быть ваша реклама")
   }
+=======
+locals {
+  cloudinit = templatefile("./cloud-init.yml", {
+    ssh_public_key = file("тут могла быть ваша реклама")
+  })
+>>>>>>> 90a12e5 (Исправлены ошибки TFLint и Checkov)
 }
 
 module "test-vm" {
@@ -29,7 +36,7 @@ module "test-vm" {
   }
 
   metadata = {
-    user-data          = data.template_file.cloudinit.rendered 
+    user-data          = local.cloudinit
     serial-port-enable = 1
   }
 }
@@ -50,7 +57,7 @@ module "test-vm2" {
   }
 
   metadata = {
-    user-data          = data.template_file.cloudinit.rendered 
+    user-data          = local.cloudinit
     serial-port-enable = 1
   }
 }
